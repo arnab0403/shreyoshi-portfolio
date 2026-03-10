@@ -4,7 +4,6 @@ const skills = [
   { icon: "📖", label: "Literary Analysis" },
   { icon: "💬", label: "Communication Skills" },
   { icon: "🔬", label: "Research Methods" },
-  { icon: "📊", label: "Data Interpretation" },
   { icon: "🌿", label: "Nutrition Science" },
   { icon: "📝", label: "Long-form Writing" },
 ];
@@ -44,7 +43,7 @@ export default function Skills() {
             {[
               {
                 platform: "Instagram",
-                handle: "@shreyoshi.writes",
+                handle: "@_caffeinated_reader_",
                 desc: "Visual essays, book recommendations, and nutrition notes — aesthetically curated for curious minds.",
                 icon: "📸",
               },

@@ -23,8 +23,12 @@ export default function Contact() {
 
             <div className="mt-10 flex flex-col gap-4">
               {[
-                { label: "Email", value: "shreyoshi@email.com", icon: "✉️" },
-                { label: "Instagram", value: "@shreyoshi.writes", icon: "📸" },
+                { label: "Email", value: "shreyoshi278@email.com", icon: "✉️" },
+                {
+                  label: "Instagram",
+                  value: "@_caffeinated_reader_",
+                  icon: "📸",
+                },
                 { label: "Blog", value: "shreyoshi.blog", icon: "🌿" },
               ].map((link) => (
                 <div key={link.label} className="flex items-center gap-3">
@@ -45,7 +49,14 @@ export default function Contact() {
             {/* QR code placeholder */}
             <div className="bg-[#2e3f3f] rounded-[12px] p-6 mb-8 inline-block">
               <div className="w-32 h-32 bg-[#EFEFE9] rounded-lg flex items-center justify-center">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#223030" strokeWidth="1.5">
+                <svg
+                  width="80"
+                  height="80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#223030"
+                  strokeWidth="1.5"
+                >
                   <rect x="3" y="3" width="7" height="7" />
                   <rect x="14" y="3" width="7" height="7" />
                   <rect x="3" y="14" width="7" height="7" />
@@ -55,7 +66,9 @@ export default function Contact() {
                   <path d="M14 14h1v1h-1zM16 14h1v1h-1zM18 14h3M14 16h1v1h-1zM16 17h1v3M18 16h1v1h1v2h-2" />
                 </svg>
               </div>
-              <p className="text-[#959D90] text-xs mt-3 text-center">Scan to connect</p>
+              <p className="text-[#959D90] text-xs mt-3 text-center">
+                Scan to connect
+              </p>
             </div>
 
             {/* Simple message form */}
@@ -101,7 +114,7 @@ export default function Contact() {
         <div className="mt-16 pt-8 border-t border-[#2e3f3f] flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-serif italic text-[#BBA58F] text-lg">Shreyoshi</p>
           <p className="text-[#959D90] text-xs">
-            © 2025 · Built with care & curiosity
+            © 2026 · Built with care & curiosity
           </p>
         </div>
       </div>
