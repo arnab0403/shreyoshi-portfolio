@@ -10,7 +10,6 @@ export default function Contact() {
     <section id="contact" className="py-24 px-6 bg-[#223030] text-[#EFEFE9]">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-
           {/* Left — intro & links */}
           <div>
             <p className="text-xs tracking-widest text-[#959D90] uppercase mb-3">
@@ -50,7 +49,14 @@ export default function Contact() {
             {/* QR placeholder */}
             <div className="mt-10 bg-[#2e3f3f] rounded-[12px] p-5 inline-block">
               <div className="w-28 h-28 bg-[#EFEFE9] rounded-lg flex items-center justify-center">
-                <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#223030" strokeWidth="1.5">
+                <svg
+                  width="72"
+                  height="72"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#223030"
+                  strokeWidth="1.5"
+                >
                   <rect x="3" y="3" width="7" height="7" />
                   <rect x="14" y="3" width="7" height="7" />
                   <rect x="3" y="14" width="7" height="7" />
@@ -59,7 +65,9 @@ export default function Contact() {
                   <rect x="5" y="16" width="3" height="3" fill="#223030" />
                 </svg>
               </div>
-              <p className="text-[#959D90] text-xs mt-2 text-center">Scan to connect</p>
+              <p className="text-[#959D90] text-xs mt-2 text-center">
+                Scan to connect
+              </p>
             </div>
           </div>
 
@@ -75,13 +83,24 @@ export default function Contact() {
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="subject">Subject</Label>
-              <Input id="subject" type="text" placeholder="Collaboration, editorial, or just hello" />
+              <Input
+                id="subject"
+                type="text"
+                placeholder="Collaboration, editorial, or just hello"
+              />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="message">Message</Label>
-              <Textarea id="message" rows={5} placeholder="Let's create something together..." />
+              <Textarea
+                id="message"
+                rows={5}
+                placeholder="Let's create something together..."
+              />
             </div>
-            <Button variant="beige" className="w-full h-12 text-sm font-semibold">
+            <Button
+              variant="secondary"
+              className="w-full h-12 text-sm font-semibold"
+            >
               Send Message
             </Button>
           </div>
@@ -91,7 +110,9 @@ export default function Contact() {
         <Separator className="mt-16 bg-[#2e3f3f]" />
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-serif italic text-[#BBA58F] text-lg">Shreyoshi</p>
-          <p className="text-[#959D90] text-xs">© 2025 · Built with care & curiosity</p>
+          <p className="text-[#959D90] text-xs">
+            © 2025 · Built with care & curiosity
+          </p>
         </div>
       </div>
     </section>
