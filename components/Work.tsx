@@ -142,7 +142,8 @@ function WorkCard({
 }
 
 export default function Work() {
-  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+  const plugin1 = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+  const plugin2 = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
   return (
     <section id="work" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
@@ -162,7 +163,7 @@ export default function Work() {
           <Carousel
             className="w-full p-4 sm:p-8"
             opts={{ loop: true }}
-            plugins={[plugin.current]}
+            plugins={[plugin1.current]}
           >
             <CarouselPrevious className="-left-3 hidden sm:flex" />
             <CarouselNext className="-right-3 hidden sm:flex" />
@@ -179,34 +180,29 @@ export default function Work() {
           </Carousel>
         </div>
 
-        {/* Editorials */}
-        <div className="w-full">
+        {/* Essays */}
+        <div className="mb-16">
           <h3 className="font-serif text-2xl text-[#523D35] mb-6 italic">
-            Design Project
+            Design Projects
           </h3>
-          <div className="w-full">
-            <Carousel
-              className="w-full p-4"
-              opts={{ loop: true, align: "center" }}
-            >
-              <CarouselPrevious className="-left-3 hidden sm:flex" />
-              <CarouselNext className="-right-3 hidden sm:flex" />
-
-              <CarouselContent className="justify-center">
-                {designProjects.map((item, i) => (
-                  <CarouselItem
-                    key={item.title}
-                    className={
-                      "basis-full sm:basis-1/2 lg:basis-1/3 py-2" +
-                      (designProjects.length === 1 ? " mx-auto" : "")
-                    }
-                  >
-                    <WorkCard item={item} index={i + 1} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
-          </div>
+          <Carousel
+            className="w-full p-4 sm:p-8"
+            opts={{ loop: true }}
+            plugins={[plugin2.current]}
+          >
+            <CarouselPrevious className="-left-3 hidden sm:flex" />
+            <CarouselNext className="-right-3 hidden sm:flex" />
+            <CarouselContent className="md:justify-center">
+              {designProjects.map((item, i) => (
+                <CarouselItem
+                  key={item.title}
+                  className="basis-full sm:basis-1/2 lg:basis-1/3 py-2"
+                >
+                  <WorkCard item={item} index={i + 1} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </div>
     </section>
