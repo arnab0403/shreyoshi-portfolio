@@ -67,6 +67,15 @@ const designProjects = [
     image: "/ornaments.jpeg",
     link: "https://online.fliphtml5.com/phlur/ibyf/",
   },
+  {
+    category: "Book Review",
+    title: "Traditional jewellery Magazine - Mousum",
+    description:
+      "A curated catalogue developed for a jewellery collection, combining visual storytelling with product presentation. The project involved organizing product descriptions, designing layouts, and creating an aesthetic narrative that enhances the brand’s visual identity.",
+    tag: "BRAND · DESIGN",
+    image: "/design-2.jpeg",
+    link: "https://online.fliphtml5.com/hqzps/dlkz/",
+  },
 ];
 
 function WorkCard({
@@ -183,7 +192,7 @@ export default function Work() {
               <CarouselPrevious className="-left-3 hidden sm:flex" />
               <CarouselNext className="-right-3 hidden sm:flex" />
 
-              <CarouselContent>
+              <CarouselContent className="justify-center">
                 {designProjects.map((item, i) => (
                   <CarouselItem
                     key={item.title}

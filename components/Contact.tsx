@@ -4,17 +4,88 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import { useState } from "react";
+
+interface FormState {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+interface SubmitStatus {
+  type: "success" | "error" | null;
+  message: string;
+}
 
 export default function Contact() {
+  const [formData, setFormData] = useState<FormState>({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState<SubmitStatus>({
+    type: null,
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus({
+          type: "success",
+          message: data.message || "Message sent successfully!",
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus({
+          type: "error",
+          message: data.error || "Failed to send message. Please try again.",
+        });
+      }
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message: "An error occurred. Please try again later.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 px-6 bg-[#223030] text-[#EFEFE9]">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           {/* Left — intro & links */}
           <div>
-            <p className="text-xs tracking-widest text-[#959D90] uppercase mb-3">
-              Final Page
-            </p>
             <h2 className="font-serif text-5xl font-light leading-tight mb-4">
               Let's <span className="italic text-[#BBA58F]">Connect</span>
             </h2>
@@ -23,18 +94,47 @@ export default function Contact() {
               Thank you for reading.
             </p>
             <p className="text-[#E8D9CD]/80 text-sm leading-relaxed max-w-sm">
-              If you see intersections between health, humanities, and design —
-              let's create together. I'm open to writing collaborations,
-              editorial projects, and conversations about food and words.
+              Every story finds its reader eventually— I’m glad this one found
+              you. If my words felt like home, or sparked something within you,
+              I’d love to hear from you. For collaborations, conversations, or
+              quiet creative chaos—my inbox is always open.
+            </p>
+            <p className="text-[#959D90] text-base leading-relaxed mb-3 mt-3 max-w-sm">
+              Let’s turn ideas into something beautiful !
             </p>
 
             <div className="mt-10 flex flex-col gap-4">
               {[
-                { label: "Email", value: "shreyoshi@email.com", icon: "✉️" },
-                { label: "Instagram", value: "@shreyoshi.writes", icon: "📸" },
-                { label: "Blog", value: "shreyoshi.blog", icon: "🌿" },
+                {
+                  label: "Email",
+                  value: "caffeinatedreader77@gmail.com",
+                  href: "mailto:caffeinatedreader77@gmail.com",
+                  icon: "✉️",
+                },
+                {
+                  label: "Instagram",
+                  value: "_caffeinated_reader_",
+                  href: "https://www.instagram.com/_caffeinated_reader_/",
+                  icon: "📸",
+                },
+                {
+                  label: "Blog",
+                  value: " https://chaptersbyshreyoshi.blogspot.com/",
+                  href: "https://chaptersbyshreyoshi.blogspot.com/",
+                  icon: "🌿",
+                },
+                {
+                  label: "Social in one",
+                  value: "https://beacons.ai/caffeinated_reader",
+                  href: "https://beacons.ai/caffeinated_reader",
+                  icon: "📸",
+                },
               ].map((link) => (
-                <div key={link.label} className="flex items-center gap-3">
+                <Link
+                  href={link.href}
+                  key={link.label}
+                  className="flex items-center gap-3"
+                >
                   <span className="text-base">{link.icon}</span>
                   <div>
                     <p className="text-xs text-[#959D90] uppercase tracking-wider">
@@ -42,7 +142,7 @@ export default function Contact() {
                     </p>
                     <p className="text-[#E8D9CD] text-sm">{link.value}</p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 
@@ -73,36 +173,71 @@ export default function Contact() {
 
           {/* Right — shadcn form */}
           <div className="space-y-5">
-            <div className="space-y-1.5">
-              <Label htmlFor="name">Your Name</Label>
-              <Input id="name" type="text" placeholder="e.g. Priya Sharma" />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="you@example.com" />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="subject">Subject</Label>
-              <Input
-                id="subject"
-                type="text"
-                placeholder="Collaboration, editorial, or just hello"
-              />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="message">Message</Label>
-              <Textarea
-                id="message"
-                rows={5}
-                placeholder="Let's create something together..."
-              />
-            </div>
-            <Button
-              variant="secondary"
-              className="w-full h-12 text-sm font-semibold"
-            >
-              Send Message
-            </Button>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="space-y-1.5">
+                <Label htmlFor="name">Your Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="e.g. Priya Sharma"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="subject">Subject</Label>
+                <Input
+                  id="subject"
+                  type="text"
+                  placeholder="Collaboration, editorial, or just hello"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="message">Message</Label>
+                <Textarea
+                  id="message"
+                  rows={5}
+                  placeholder="Let's create something together..."
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <Button
+                variant="secondary"
+                className="w-full h-12 text-sm font-semibold"
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? "Sending..." : "Send Message"}
+              </Button>
+            </form>
+            {status.type && (
+              <div
+                className={`p-4 rounded-md text-sm ${
+                  status.type === "success"
+                    ? "bg-green-500/20 text-green-100 border border-green-500/30"
+                    : "bg-red-500/20 text-red-100 border border-red-500/30"
+                }`}
+              >
+                {status.message}
+              </div>
+            )}
           </div>
         </div>
 
